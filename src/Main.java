@@ -1,20 +1,20 @@
-import escenario.Mundo;
 import hud.GameHud;
+import partida.Partida;
 
 public class Main {
     public static void main(String[] args) {
 
         System.out.println("Lone Way a computer game by isrev\n");
-        GameHud gameHud = new GameHud();
-        Mundo mundo = new Mundo();
-        mundo.setDescripcionMundo("Te encuentras en medio de un claro, paras para descansar antes de reanudar el viaje");
-        System.out.println(mundo);
 
-        while(true){
+        Partida partida = new Partida();
+        partida.nuevoJuego();
+
+        GameHud gameHud = new GameHud();
+
+        while(partida.getEstadoPartida()){
             switch (gameHud.tomarDecision()){
                 case AVANZAR:
-                    mundo = new Mundo();
-                    System.out.println(mundo);
+                   partida.avanzarPartida();
                  break;
                 case INTERACTUAR:
                     System.out.println("No hay interacción");

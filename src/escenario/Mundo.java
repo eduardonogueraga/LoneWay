@@ -1,5 +1,6 @@
 package escenario;
 
+import escenario.items.Botiquines;
 import escenario.items.Item;
 import escenario.items.Viveres;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import static modelosCsv.Modelo.ModelosDatos.MUNDOS;
 import static modelosCsv.Modelo.recuperarDatos;
 import static utiles.Utiles.formatearTextoConSaltosDeLinea;
+import static utiles.Utiles.rand;
 
 public class Mundo {
 
@@ -23,7 +25,8 @@ public class Mundo {
         String[] caracteristicasMundo = recuperarDatos(MUNDOS).split(";");
         this.peligrosidadMundo = Float.parseFloat(caracteristicasMundo[0]);
         this.descripcionMundo = caracteristicasMundo[1].replace('"', ' ').trim(); //quito los "
-        this.abundanciaItem = Integer.parseInt(caracteristicasMundo[2]);
+        //this.abundanciaItem = Integer.parseInt(caracteristicasMundo[2]);
+        this.abundanciaItem = rand(5);
         this.valorItems = Integer.parseInt(caracteristicasMundo[3]);
 
         generarItemsMundo();
@@ -69,10 +72,19 @@ public class Mundo {
         Mundo.mundoAnterior = mundoAnterior;
     }
 
+    public ArrayList<Item> getItemsMundo() {
+        return itemsMundo;
+    }
+
     public void generarItemsMundo(){
         for (int i=0; i<this.getAbundanciaItem(); i++){
             Viveres comida = new Viveres();
             itemsMundo.add(comida);
+        }
+
+        for (int i=0; i<this.getAbundanciaItem(); i++){
+            Botiquines meds = new Botiquines();
+            itemsMundo.add(meds);
         }
     }
 

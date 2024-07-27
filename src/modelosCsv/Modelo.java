@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Modelo {
     public enum ModelosDatos{
-        MUNDOS, VIVERES, ARMAS, ENEMIGOS
+        MUNDOS, VIVERES, MEDICAMENTOS, ARMAS, ENEMIGOS
     }
 
     public static String recuperarDatos(ModelosDatos modelo){
@@ -22,6 +22,7 @@ public class Modelo {
         String nombreModelo = switch (modelo) {
             case MUNDOS -> "mundos";
             case VIVERES -> "viveres";
+            case MEDICAMENTOS -> "medicamentos";
             case ARMAS -> "armas";
             default -> "";
         };

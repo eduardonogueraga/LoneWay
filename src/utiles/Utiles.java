@@ -1,5 +1,7 @@
 package utiles;
 
+import java.util.Random;
+
 public class Utiles {
 
     public static String formatearTextoConSaltosDeLinea(String texto, int palabrasPorLinea) {
@@ -18,4 +20,11 @@ public class Utiles {
         return sb.toString().trim();
     }
 
+    public static int rand(int max){
+        Random rand = new Random();
+        return rand.nextInt(max);
+    }
+
 }
+
+
