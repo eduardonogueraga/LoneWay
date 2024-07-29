@@ -12,11 +12,15 @@ import static utiles.Utiles.formatearTextoConSaltosDeLinea;
 import static utiles.Utiles.rand;
 
 public class Mundo {
+    public final float MAX_KILOMETROS_DISTANCIA = 150F;
 
     String descripcionMundo;
     float peligrosidadMundo;
     int valorItems; //Calidad de los item encontrados
     int abundanciaItem; //Num items posibles
+    float kilometrosProximoMundo;
+
+
     static int mundoAnterior; //TODO implementar que no se repitan mundos
 
     ArrayList<Item> itemsMundo = new ArrayList<>();
@@ -27,6 +31,7 @@ public class Mundo {
         this.descripcionMundo = caracteristicasMundo[1].replace('"', ' ').trim(); //quito los "
         //this.abundanciaItem = Integer.parseInt(caracteristicasMundo[2]);
         this.abundanciaItem = rand(5);
+        this.kilometrosProximoMundo = rand(MAX_KILOMETROS_DISTANCIA);
         this.valorItems = Integer.parseInt(caracteristicasMundo[3]);
 
         generarItemsMundo();
@@ -76,6 +81,14 @@ public class Mundo {
         return itemsMundo;
     }
 
+    public float getKilometrosProximoMundo() {
+        return kilometrosProximoMundo;
+    }
+
+    public void setKilometrosProximoMundo(float kilometrosProximoMundo) {
+        this.kilometrosProximoMundo = kilometrosProximoMundo;
+    }
+
     public void generarItemsMundo(){
         for (int i=0; i<this.getAbundanciaItem(); i++){
             Viveres comida = new Viveres();
@@ -93,6 +106,8 @@ public class Mundo {
         char primeraLetra = getDescripcionMundo().toLowerCase().charAt(0);
         return "Llegas a "
                 + formatearTextoConSaltosDeLinea(primeraLetra + descripcionMundo.substring(1), 20)
+                + "\nPeligrosidad " +  this.getPeligrosidadMundo()
+                + "\nProxima parada " +  this.getKilometrosProximoMundo() + " Km"
                 + "\n";
     }
 

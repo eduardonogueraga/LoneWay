@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /*
@@ -27,7 +28,7 @@ public class Modelo {
             default -> "";
         };
 
-        String archivoCSV = "C:/Users/isrev/IdeaProjects/LoneWay/src/modelosCsv/"+nombreModelo+".csv";
+        String archivoCSV = Paths.get("src", "modelosCsv", nombreModelo + ".csv").toString();
         File archivo = new File(archivoCSV);
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {

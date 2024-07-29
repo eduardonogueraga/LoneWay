@@ -1,33 +1,43 @@
 package hud;
 
+import partida.Partida;
 import java.util.Scanner;
 
 public class GameHud {
 
     public enum Decisiones{
-        AVANZAR, INTERACTUAR, INVENTARIO, INVALIDO
+        AVANZAR, ADENTRARSE, INTERACTUAR, INVENTARIO, INVALIDO
     }
 
     Scanner teclado = new Scanner(System.in);
 
-    public void mostrarHUD() {
-        System.out.println("W  [AVANZAR] | F [INTERACTUAR] | E  [INVENTARIO]");
+    public void mostrarHUD(Partida.EstadosPartida estado) {
+        switch (estado){
+            case INICIO_PARTIDA:
+                System.out.println("W  [AVANZAR] | E  [INVENTARIO]");
+                break;
+            case ENTRANDO_CIUDAD:
+                System.out.println("W  [EVITAR] | Q  [ADENTRARSE] | E  [INVENTARIO]");
+                break;
+            case SALIENDO_CIUDAD:
+                System.out.println("W  [AVANZAR] | F [INTERACTUAR] | E  [INVENTARIO]");
+                break;
+            case FINAL_PARTIDA:
+                System.out.println("W  [SALIR] ");
+                break;
+        }
     }
     public Decisiones tomarDecision(){
-        mostrarHUD();
         switch (teclado.nextLine().toUpperCase()){
             case "W":
-                System.out.println("Prosigues el viaje...\n");
                 return Decisiones.AVANZAR;
+            case "Q":
+                return Decisiones.ADENTRARSE;
             case "F":
-                System.out.println("Interactuar\n");
                 return Decisiones.INTERACTUAR;
             case "E":
-                System.out.println("Inventario\n");
-                System.out.println("|NOMBRE|   |TIPO|   |PESO|   |DESC|     |VALOR|");
                 return Decisiones.INVENTARIO;
             default:
-                System.out.println("Acción no valida");
                 return Decisiones.INVALIDO;
 
         }

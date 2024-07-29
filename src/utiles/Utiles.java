@@ -25,6 +25,11 @@ public class Utiles {
         return rand.nextInt(max);
     }
 
+    public static float rand(float max) {
+        Random rand = new Random();
+        return rand.nextFloat() * max;
+    }
+
 }
 
 
